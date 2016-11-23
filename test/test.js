@@ -47,4 +47,28 @@ describe('DingTalk', function () {
     });
   });
 
+  it('send message text', function (done) {
+    dingTalk.sendText(config.agentId, config.toUsers, new Date().toString())
+    .then(ret => {
+      should.ok(ret);
+      done();
+    })
+    .catch(err => {
+      console.log('error', err);
+      done(err);
+    });
+  });
+
+  it('send message Link', function (done) {
+    dingTalk.sendLink(config.agentId, config.toUsers, config.url, 'Hello Yourtion', new Date().toString(), config.img)
+    .then(ret => {
+      should.ok(ret);
+      done();
+    })
+    .catch(err => {
+      console.log('error', err);
+      done(err);
+    });
+  });
+
 });
