@@ -1,11 +1,8 @@
 {
   "name": "super-dingtalk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "DingTalk client for Node.js",
   "main": "lib/index.js",
-  "dependencies": {
-    "eslint-config-guo": "^0.0.5"
-  },
   "devDependencies": {
     "eslint-config-guo": "0.0.5",
     "eslint-plugin-promise": "^3.4.0",
@@ -14,7 +11,7 @@
   },
   "scripts": {
     "lint": "eslint --fix ./lib ./test",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -t 10000"
   },
   "repository": {
     "type": "git",
