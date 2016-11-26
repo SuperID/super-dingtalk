@@ -1,10 +1,10 @@
 {
   "name": "super-dingtalk",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "DingTalk client for Node.js",
   "main": "lib/index.js",
   "devDependencies": {
-    "eslint-config-guo": "0.0.5",
+    "eslint-config-guo": "^0.1.0",
     "eslint-plugin-promise": "^3.4.0",
     "mocha": "^3.1.2",
     "should": "^11.1.1"
