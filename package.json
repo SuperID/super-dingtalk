@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/SuperID/super-dingtalk/issues"
   },
-  "homepage": "https://github.com/SuperID/super-dingtalk#readme"
+  "homepage": "https://github.com/SuperID/super-dingtalk#readme",
+  "dependencies": {
+    "request": "^2.79.0"
+  }
 }
