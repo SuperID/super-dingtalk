@@ -13,7 +13,7 @@ $ npm install super-dingtalk --save
 ```javascript
 'use strict';
 
-const DingTalk = require('super-dingtalk');
+const DingTalk = require('super-dingtalk').DingTalk;
 
 const client = new DingTalk({
   corpId: 'xxxxx',

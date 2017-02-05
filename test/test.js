@@ -1,7 +1,7 @@
 'use strict';
 
 const config = require('./config');
-const DingTalk = require('../lib');
+const DingTalk = require('../lib').DingTalk;
 const should = require('should');
 
 const dingTalk = new DingTalk({
