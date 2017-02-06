@@ -18,7 +18,6 @@ describe('DingTalk', function () {
       done();
     })
     .catch(err => {
-      console.log('error', err);
       done(err);
     });
   });
@@ -27,10 +26,11 @@ describe('DingTalk', function () {
     dingTalk.getTicket()
     .then(ret => {
       should.ok(ret);
+      should.ok(ret.ticket);
+      should.ok(ret.expires_in);
       done();
     })
     .catch(err => {
-      console.log('error', err);
       done(err);
     });
   });
@@ -42,7 +42,6 @@ describe('DingTalk', function () {
       done();
     })
     .catch(err => {
-      console.log('error', err);
       done(err);
     });
   });
@@ -54,7 +53,6 @@ describe('DingTalk', function () {
       done();
     })
     .catch(err => {
-      console.log('error', err);
       done(err);
     });
   });
@@ -66,7 +64,6 @@ describe('DingTalk', function () {
       done();
     })
     .catch(err => {
-      console.log('error', err);
       done(err);
     });
   });
