@@ -10,9 +10,11 @@ $ npm install super-dingtalk --save
 
 ## 使用方法
 
-```javascript
-'use strict';
+### 企业应用
 
+使用方法： [dingtalk.js](test/dingtalk.js)
+
+```javascript
 const DingTalk = require('super-dingtalk').DingTalk;
 
 const client = new DingTalk({
@@ -26,6 +28,27 @@ client.getToken()
   .catch(err => console.log('error', err));
 ```
 
+### 免登服务 
+
+使用方法： [dtoauth.js](test/dtoauth.js)
+
+```javascript
+const DTOAuth = require('../lib').DTOAuth;
+
+const oauth = new DTOAuth({
+  appId: 'xxx',
+  appSecret: 'xxx',
+});
+
+// 获取扫描登录链接
+const url = oauth.getQRParmasUrl('http://blog.yourtion.com');
+
+// 获取 AccessToken （调用其他操作前请先获取 AccessToken）
+oauth.getToken()
+  .then(ret => console.log('success', ret))
+  .catch(err => console.log('error', err));
+```
+
 其他操作详见测试与相关文档
 
 ## 相关资源：
@@ -34,6 +57,16 @@ client.getToken()
 + [错误码解释](https://open-doc.dingtalk.com/docs/doc.htm?spm=a219a.7629140.0.0.JJsHpJ&treeId=172&articleId=104965&docType=1)
 
 ## 功能
+
+### 免登接入 （DTOAuth）
+
+- [X] 生成扫码登录URL
+- [X] 获取钉钉开放应用 AccessToken
+- [X] 获取用户授权的持久授权码
+- [X] 获取用户授权的 SnsToken
+- [X] 获取用户授权的个人信息
+
+参考： [免登服务](https://open-doc.dingtalk.com/docs/doc.htm?spm=a219a.7629140.0.0.OJgltA&treeId=168&articleId=104878&docType=1)
 
 ### 基础功能
 
