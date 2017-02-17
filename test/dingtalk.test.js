@@ -9,6 +9,8 @@ const dingTalk = new DingTalk({
   secret: config.secret,
 });
 
+let ticketTime = 0;
+
 describe('DingTalk', function () {
 
   it('get token', function (done) {
@@ -28,6 +30,7 @@ describe('DingTalk', function () {
       should.ok(ret);
       should.ok(ret.ticket);
       should.ok(ret.expires_in);
+      ticketTime = ret.expires_in;
       done();
     })
     .catch(err => {
@@ -44,6 +47,20 @@ describe('DingTalk', function () {
     .catch(err => {
       done(err);
     });
+  });
+
+  it('get ticket', function (done) {
+    dingTalk.getTicket()
+      .then(ret => {
+        should.ok(ret);
+        should.ok(ret.ticket);
+        should.ok(ret.expires_in);
+        ret.expires_in.should.be.below(ticketTime);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
   });
 
   it('send message text', function (done) {
