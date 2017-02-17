@@ -15,6 +15,12 @@ let persistentCode;
 let snsToken;
 
 describe('DTOAuth', function () {
+  it('get QRParmasUrl', function (done) {
+    const url = oauth.getQRParmasUrl('http://blog.yourtion.com');
+    should.ok(url);
+    done();
+  });
+
   it('get token', function (done) {
     oauth.getToken()
       .then(ret => {
@@ -61,7 +67,6 @@ describe('DTOAuth', function () {
       .then(ret => {
         should.ok(ret);
         should.ok(ret.user_info);
-        console.log(ret);
         done();
       })
       .catch(err => {
