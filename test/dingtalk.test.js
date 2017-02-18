@@ -9,31 +9,18 @@ const dingTalk = new DingTalk({
   secret: config.secret,
 });
 
-let ticketTime = 0;
-let token = '';
-let unionid = '';
+let unionid;
 
 describe('DingTalk', function () {
 
-  it('get token', function (done) {
-    dingTalk.getToken()
+  it('获取前端签名', (done) => {
+    dingTalk.getSign()
     .then(ret => {
       should.ok(ret);
-      token = ret;
-      done();
-    })
-    .catch(err => {
-      done(err);
-    });
-  });
-
-  it('get ticket', function (done) {
-    dingTalk.getTicket()
-    .then(ret => {
-      should.ok(ret);
+      should.ok(ret.timeStamp);
+      should.ok(ret.nonceStr);
       should.ok(ret.ticket);
-      should.ok(ret.expires_in);
-      ticketTime = ret.expires_in;
+      should.ok(ret.signature);
       done();
     })
     .catch(err => {
@@ -41,8 +28,11 @@ describe('DingTalk', function () {
     });
   });
 
-  it('simpleList', function (done) {
-    dingTalk.simpleList(config.department_id)
+  it('simpleList', (done) => {
+    const pamras = {
+      department_id: config.department_id,
+    };
+    dingTalk.get('/user/simplelist', pamras, 'userlist')
     .then(ret => {
       should.ok(ret);
       done();
@@ -52,8 +42,11 @@ describe('DingTalk', function () {
     });
   });
 
-  it('userInfo', function (done) {
-    dingTalk.userInfo(config.user_id)
+  it('获取成员详情 - /user/get', (done) => {
+    const pamras = {
+      userid: config.user_id,
+    };
+    dingTalk.get('/user/get', pamras)
     .then(ret => {
       should.ok(ret);
       unionid = ret.unionid;
@@ -65,8 +58,11 @@ describe('DingTalk', function () {
     });
   });
 
-  it('userIdByUnionid', function (done) {
-    dingTalk.userIdByUnionid(unionid)
+  it('根据unionid获取成员的userid - /user/getUseridByUnionid', (done) => {
+    const pamras = {
+      unionid,
+    };
+    dingTalk.get('/user/getUseridByUnionid', pamras, 'userid')
     .then(ret => {
       should.ok(ret);
       ret.should.equal(config.user_id);
@@ -77,33 +73,7 @@ describe('DingTalk', function () {
     });
   });
 
-  it('get ticket', function (done) {
-    dingTalk.getTicket()
-      .then(ret => {
-        should.ok(ret);
-        should.ok(ret.ticket);
-        should.ok(ret.expires_in);
-        ret.expires_in.should.be.below(ticketTime);
-        done();
-      })
-      .catch(err => {
-        done(err);
-      });
-  });
-
-  it('get token from cache', function (done) {
-    dingTalk.getToken()
-    .then(ret => {
-      should.ok(ret);
-      ret.should.equal(token);
-      done();
-    })
-    .catch(err => {
-      done(err);
-    });
-  });
-
-  it('send message text', function (done) {
+  it('发送文字消息', (done) => {
     dingTalk.sendText(config.agentId, config.toUsers, new Date().toString())
     .then(ret => {
       should.ok(ret);
@@ -114,7 +84,7 @@ describe('DingTalk', function () {
     });
   });
 
-  it('send message Link', function (done) {
+  it('发送链接消息', (done) => {
     dingTalk.sendLink(config.agentId, config.toUsers, config.url, 'Hello Yourtion', new Date().toString(), config.img)
     .then(ret => {
       should.ok(ret);
