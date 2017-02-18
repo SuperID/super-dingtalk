@@ -10,9 +10,34 @@ $ npm install super-dingtalk --save
 
 ## 使用方法
 
+### 应用方法说明
+
+**各个方法需要的 Token 在接口请求（`request`、`get`、`post`）自动获取和续期，也可以通过  `getToken()` 获得**
+
+```javascript
+/**
+  * 通用请求接口
+  *
+  * @param {String} method - GET、POST
+  * @param {String} api - API地址（以 / 开头）
+  * @param {Object} query - 请求URL参数（获取AccessToken后默认会带上）
+  * @param {String} body - POST请求的body（JSON需要JSON.stringify）
+  * @param {String|Array} key - 返回数据中取出需要的key（不传全部ret返回）
+  *
+  * @returns {Promise}
+  */
+request(method, api, query, body, key)
+
+// GET 方法简化接口
+get(api, query, key)
+
+// POST 方法简化接口
+post(api, body, key)
+```
+
 ### 企业应用
 
-使用方法： [dingtalk.js](test/dingtalk.js)
+使用方法： [dingtalk.js](test/test-dingtalk.js)
 
 ```javascript
 const DingTalk = require('super-dingtalk').DingTalk;
@@ -21,16 +46,11 @@ const client = new DingTalk({
   corpId: 'xxxxx',
   secret: 'xxxxx',
 });
-
-// 获取 AccessToken （调用其他操作前请先获取 AccessToken）
-client.getToken()
-  .then(ret => console.log('success', ret))
-  .catch(err => console.log('error', err));
 ```
 
 ### 免登服务 
 
-使用方法： [dtoauth.js](test/dtoauth.js)
+使用方法： [dtoauth.js](test/test-dtoauth.js)
 
 ```javascript
 const DTOAuth = require('../lib').DTOAuth;
@@ -42,11 +62,6 @@ const oauth = new DTOAuth({
 
 // 获取扫描登录链接
 const url = oauth.getQRParmasUrl('http://blog.yourtion.com');
-
-// 获取 AccessToken （调用其他操作前请先获取 AccessToken）
-oauth.getToken()
-  .then(ret => console.log('success', ret))
-  .catch(err => console.log('error', err));
 ```
 
 其他操作详见测试与相关文档
@@ -56,22 +71,23 @@ oauth.getToken()
 + [钉钉服务端开发文档](https://open-doc.dingtalk.com/doc2/detail?spm=0.0.0.0.cffLIh&treeId=172&articleId=104981&docType=1)
 + [错误码解释](https://open-doc.dingtalk.com/docs/doc.htm?spm=a219a.7629140.0.0.JJsHpJ&treeId=172&articleId=104965&docType=1)
 
-## 功能
+## 免登接入 （DTOAuth）
 
-### 免登接入 （DTOAuth）
-
-- [X] 生成扫码登录URL
-- [X] 获取钉钉开放应用 AccessToken
-- [X] 获取用户授权的持久授权码
-- [X] 获取用户授权的 SnsToken
-- [X] 获取用户授权的个人信息
+- [X] 生成扫码登录URL `getQRParmasUrl(redirectUri)`
+- [X] 获取钉钉开放应用 AccessToken `getToken()`
+- [X] 获取用户授权的持久授权码 `getPersistentCode(tmpAuthCode)`
+- [X] 获取用户授权的 SnsToken `getSnsToken(openId, persistentCode)`
+- [X] 获取用户授权的个人信息 `getUserInfo(snsToken)`
 
 参考： [免登服务](https://open-doc.dingtalk.com/docs/doc.htm?spm=a219a.7629140.0.0.OJgltA&treeId=168&articleId=104878&docType=1)
 
+## 钉钉服务端 （DingTalk）
+
 ### 基础功能
 
-- [x] 获取 AccessToken
-- [x] 获取 jsapi_ticket
+- [x] 获取 AccessToken ``getToken()``
+- [x] 获取 jsapi_ticket `getTicket()`
+- [X] 获取 Web 端签名 `getSign(url)` 
 - [ ] 获取企业员工人数
 - [ ] 服务端加密
 - [ ] 服务端解密
@@ -85,8 +101,8 @@ oauth.getToken()
 - [ ] 创建部门
 - [ ] 更新部门
 - [ ] 删除部门
-- [X] 根据 unionid 获取成员的 userid 
-- [X] 获取成员详情
+- [X] 根据 unionid 获取成员的 userid `get('/user/simplelist', pamras, 'userlist')`
+- [X] 获取成员详情 `get('/user/get', pamras)`
 - [ ] 创建成员
 - [ ] 创建成员
 - [ ] 更新成员
