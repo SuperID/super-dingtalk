@@ -11,6 +11,7 @@ const dingTalk = new DingTalk({
 
 let ticketTime = 0;
 let token = '';
+let unionid = '';
 
 describe('DingTalk', function () {
 
@@ -44,6 +45,31 @@ describe('DingTalk', function () {
     dingTalk.simpleList(config.department_id)
     .then(ret => {
       should.ok(ret);
+      done();
+    })
+    .catch(err => {
+      done(err);
+    });
+  });
+
+  it('userInfo', function (done) {
+    dingTalk.userInfo(config.user_id)
+    .then(ret => {
+      should.ok(ret);
+      unionid = ret.unionid;
+      ret.userid.should.equal(config.user_id);
+      done();
+    })
+    .catch(err => {
+      done(err);
+    });
+  });
+
+  it('userIdByUnionid', function (done) {
+    dingTalk.userIdByUnionid(unionid)
+    .then(ret => {
+      should.ok(ret);
+      ret.should.equal(config.user_id);
       done();
     })
     .catch(err => {
