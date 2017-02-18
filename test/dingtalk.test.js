@@ -10,6 +10,7 @@ const dingTalk = new DingTalk({
 });
 
 let ticketTime = 0;
+let token = '';
 
 describe('DingTalk', function () {
 
@@ -17,6 +18,7 @@ describe('DingTalk', function () {
     dingTalk.getToken()
     .then(ret => {
       should.ok(ret);
+      token = ret;
       done();
     })
     .catch(err => {
@@ -61,6 +63,18 @@ describe('DingTalk', function () {
       .catch(err => {
         done(err);
       });
+  });
+
+  it('get token from cache', function (done) {
+    dingTalk.getToken()
+    .then(ret => {
+      should.ok(ret);
+      ret.should.equal(token);
+      done();
+    })
+    .catch(err => {
+      done(err);
+    });
   });
 
   it('send message text', function (done) {
