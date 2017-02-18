@@ -9,7 +9,7 @@ const oauth = new DTOAuth({
   appSecret: config.oauth.appSecret,
 });
 
-const tempCode = '41050af417113b25a183b90a1da7e330';
+const tempCode = '';
 let openId;
 let persistentCode;
 let snsToken;
@@ -33,6 +33,7 @@ describe('DTOAuth', function () {
   });
 
   it('get PersistentCode', function (done) {
+    if(!tempCode) return done();
     oauth.getPersistentCode(tempCode)
       .then(ret => {
         should.ok(ret);
@@ -49,6 +50,7 @@ describe('DTOAuth', function () {
   });
 
   it('get SnsToken', function (done) {
+    if(!tempCode) return done();
     oauth.getSnsToken(openId, persistentCode)
       .then(ret => {
         should.ok(ret);
@@ -63,10 +65,22 @@ describe('DTOAuth', function () {
   });
 
   it('get UserInfo', function (done) {
+    if(!tempCode) return done();
     oauth.getUserInfo(snsToken)
       .then(ret => {
         should.ok(ret);
         should.ok(ret.user_info);
+        done();
+      })
+      .catch(err => {
+        done(err);
+      });
+  });
+
+  it('get token from cache', function (done) {
+    oauth.getToken()
+      .then(ret => {
+        should.ok(ret);
         done();
       })
       .catch(err => {
