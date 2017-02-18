@@ -1,7 +1,7 @@
 {
   "name": "super-dingtalk",
   "version": "0.8.0",
-  "description": "DingTalk client for Node.js",
+  "description": "DingTalk and OAuth client for Node.js",
   "main": "lib/index.js",
   "devDependencies": {
     "eslint-config-guo": "^0.3.0",
@@ -19,7 +19,10 @@
     "url": "git+https://github.com/SuperID/super-dingtalk.git"
   },
   "keywords": [
-    "DingTalk"
+    "DingTalk",
+    "DingTalk OAuth",
+    "钉钉",
+    "钉钉免登"
   ],
   "author": "Yourtion Guo <yourtion@gmail.com>",
   "license": "MIT",

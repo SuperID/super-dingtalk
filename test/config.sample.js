@@ -8,4 +8,8 @@ module.exports = {
   toUsers: [ 'user_id_1', 'user_id_2' ],
   url: 'https://blog.yourtion.com/',
   img: 'image id',
+  oauth: {
+    appId: 'xxxxx',
+    appSecret: 'xxxxxx',
+  },
 };
