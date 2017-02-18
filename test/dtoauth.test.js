@@ -15,24 +15,14 @@ let persistentCode;
 let snsToken;
 
 describe('DTOAuth', function () {
-  it('get QRParmasUrl', function (done) {
+
+  it('get QRParmasUrl', (done) => {
     const url = oauth.getQRParmasUrl('http://blog.yourtion.com');
     should.ok(url);
     done();
   });
 
-  it('get token', function (done) {
-    oauth.getToken()
-      .then(ret => {
-        should.ok(ret);
-        done();
-      })
-      .catch(err => {
-        done(err);
-      });
-  });
-
-  it('get PersistentCode', function (done) {
+  it('get PersistentCode', (done) => {
     if(!tempCode) return done();
     oauth.getPersistentCode(tempCode)
       .then(ret => {
@@ -49,7 +39,7 @@ describe('DTOAuth', function () {
       });
   });
 
-  it('get SnsToken', function (done) {
+  it('get SnsToken', (done) => {
     if(!tempCode) return done();
     oauth.getSnsToken(openId, persistentCode)
       .then(ret => {
@@ -64,23 +54,12 @@ describe('DTOAuth', function () {
       });
   });
 
-  it('get UserInfo', function (done) {
+  it('get UserInfo', (done) => {
     if(!tempCode) return done();
     oauth.getUserInfo(snsToken)
       .then(ret => {
         should.ok(ret);
         should.ok(ret.user_info);
-        done();
-      })
-      .catch(err => {
-        done(err);
-      });
-  });
-
-  it('get token from cache', function (done) {
-    oauth.getToken()
-      .then(ret => {
-        should.ok(ret);
         done();
       })
       .catch(err => {
