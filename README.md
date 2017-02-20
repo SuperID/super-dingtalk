@@ -78,6 +78,7 @@ const url = oauth.getQRParmasUrl('http://blog.yourtion.com');
 - [X] 获取用户授权的持久授权码 `getPersistentCode(tmpAuthCode)`
 - [X] 获取用户授权的 SnsToken `getSnsToken(openId, persistentCode)`
 - [X] 获取用户授权的个人信息 `getUserInfo(snsToken)`
+- [X] 通过临时授权吗获取用户信息 `getUserInfoFromCode(tmpAuthCode)`
 
 参考： [免登服务](https://open-doc.dingtalk.com/docs/doc.htm?spm=a219a.7629140.0.0.OJgltA&treeId=168&articleId=104878&docType=1)
 
