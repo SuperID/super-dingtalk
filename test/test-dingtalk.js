@@ -7,6 +7,7 @@ const should = require('should');
 const dingTalk = new DingTalk({
   corpId: config.corpId,
   secret: config.secret,
+  agentId: config.agentId,
 });
 
 let unionid;
@@ -74,7 +75,7 @@ describe('DingTalk', function () {
   });
 
   it('发送文字消息', (done) => {
-    dingTalk.sendText(config.agentId, config.toUsers, new Date().toString())
+    dingTalk.sendText(config.toUsers, new Date().toString())
     .then(ret => {
       should.ok(ret);
       done();
@@ -85,7 +86,7 @@ describe('DingTalk', function () {
   });
 
   it('发送链接消息', (done) => {
-    dingTalk.sendLink(config.agentId, config.toUsers, config.url, 'Hello Yourtion', new Date().toString(), config.img)
+    dingTalk.sendLink(config.toUsers, config.url, 'Hello Yourtion', new Date().toString(), config.img)
     .then(ret => {
       should.ok(ret);
       done();
