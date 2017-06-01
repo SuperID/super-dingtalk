@@ -89,7 +89,7 @@ const url = oauth.getQRParmasUrl('http://blog.yourtion.com');
 - [x] 获取 AccessToken ``getToken()``
 - [x] 获取 jsapi_ticket `getTicket()`
 - [X] 获取 Web 端签名 `getSign(url)` 
-- [ ] 获取企业员工人数
+- [X] 获取企业员工人数 `get('/user/get_org_user_count', { onlyActive: 0|1 }, 'count')`
 - [ ] 服务端加密
 - [ ] 服务端解密
 - [ ] 记录统计数据
@@ -97,20 +97,20 @@ const url = oauth.getQRParmasUrl('http://blog.yourtion.com');
 
 ### 管理通讯录
 
-- [ ] 获取部门列表
-- [ ] 获取部门详情
+- [X] 获取部门列表 `get('/department/list', { id: 1|"parentid" }, 'department')`
+- [X] 获取部门详情 `get('/department/get', { id: "department_id" })`
 - [ ] 创建部门
 - [ ] 更新部门
 - [ ] 删除部门
-- [X] 根据 unionid 获取成员的 userid `get('/user/simplelist', pamras, 'userlist')`
-- [X] 获取成员详情 `get('/user/get', pamras)`
+- [X] 根据 unionid 获取成员的 userid `get('/user/getUseridByUnionid', { unionid }, 'userid')`
+- [X] 获取成员详情 `get('/user/get', { userid })`
 - [ ] 创建成员
 - [ ] 创建成员
 - [ ] 更新成员
 - [ ] 删除成员
 - [ ] 批量删除成员
-- [x] 获取部门成员
-- [ ] 获取部门成员（详情）
+- [x] 获取部门成员 `get('/user/simplelist', pamras, 'userlist')`
+- [ ] 获取部门成员（详情）`get('/user/list', pamras, 'userlist')`
 - [ ] 获取管理员列表
 
 ### 企业会话消息接口
