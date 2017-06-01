@@ -1,13 +1,16 @@
 {
   "name": "super-dingtalk",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "DingTalk and OAuth client for Node.js",
   "main": "lib/index.js",
+  "dependencies": {
+    "request": "^2.81.0"
+  },
   "devDependencies": {
-    "eslint-config-guo": "^0.3.0",
-    "eslint-plugin-promise": "^3.4.2",
-    "mocha": "^3.2.0",
-    "should": "^11.2.0"
+    "eslint-config-guo": "^0.4.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "mocha": "^3.4.2",
+    "should": "^11.2.1"
   },
   "scripts": {
     "lint": "eslint --fix ./lib ./test",
@@ -30,8 +33,5 @@
   "bugs": {
     "url": "https://github.com/SuperID/super-dingtalk/issues"
   },
-  "homepage": "https://github.com/SuperID/super-dingtalk#readme",
-  "dependencies": {
-    "request": "^2.79.0"
-  }
+  "homepage": "https://github.com/SuperID/super-dingtalk#readme"
 }
